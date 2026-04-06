@@ -1,0 +1,394 @@
+/* ==========================================
+   FreeUp iOS - Master Stylesheet
+   ========================================== */
+
+:root {
+    --bg: #000000;
+    --card-bg: rgba(28, 28, 30, 0.7);
+    --accent: #30d158;
+    --text-main: #ffffff;
+    --text-sub: #8e8e93;
+    --glass: rgba(255, 255, 255, 0.1);
+    
+    /* 画面サイズに合わせてフォントサイズを自動調整 */
+    --font-base: clamp(12px, 1.5vw, 15px);
+    --font-h1: clamp(1.8rem, 4vh, 3rem);
+    --font-h2: clamp(1.3rem, 3vh, 1.8rem);
+    --font-h3: clamp(1.1rem, 2vh, 1.3rem);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    line-height: 1.5;
+    font-size: var(--font-base);
+    /* 中央寄せ */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: clamp(20px, 4vh, 60px) 15px;
+    position: relative;
+}
+
+/* 言語切り替え */
+.lang-switcher {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    gap: 8px;
+    z-index: 100;
+}
+
+.lang-btn {
+    background: var(--glass);
+    border: 1px solid var(--glass);
+    color: var(--text-main);
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.lang-btn.active {
+    background: var(--text-main);
+    color: var(--bg);
+}
+
+/* ヘッダー周り */
+header {
+    text-align: center;
+    margin-bottom: clamp(20px, 4vh, 50px);
+    margin-top: clamp(10px, 2vh, 20px);
+}
+
+.app-icon {
+    width: clamp(80px, 12vh, 130px);
+    height: clamp(80px, 12vh, 130px);
+    background: none;
+    border-radius: clamp(20px, 3vh, 32px);
+    margin: 0 auto clamp(15px, 2vh, 25px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.pro-badge {
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    background-color: #f59e0b;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.75rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+
+h1 {
+    font-size: var(--font-h1);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 clamp(5px, 1vh, 10px);
+    line-height: 1.1;
+}
+
+.tagline, .welcome {
+    font-size: clamp(1rem, 2vh, 1.2rem);
+    color: var(--text-sub);
+    margin-bottom: clamp(15px, 3vh, 30px);
+}
+
+/* ボタン */
+.download-btn, .kofi-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 40px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.download-btn {
+    background-color: var(--text-main);
+    color: var(--bg);
+    padding: clamp(12px, 2vh, 18px) clamp(25px, 4vw, 40px);
+    font-size: clamp(1rem, 2vh, 1.2rem);
+}
+
+.download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255,255,255,0.2);
+}
+
+.kofi-btn {
+    background-color: #FF5E5B;
+    color: #fff;
+    padding: clamp(10px, 2vh, 15px) clamp(20px, 3vw, 35px);
+    font-size: 1.05rem;
+}
+
+.kofi-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 94, 91, 0.3);
+}
+
+.version-info {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    cursor: pointer;
+    border-bottom: 1px dotted var(--text-sub);
+    transition: color 0.2s;
+}
+
+.version-info:hover {
+    color: var(--text-main);
+    border-bottom: 1px dotted var(--text-main);
+}
+
+/* グリッドレイアウト */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(12px, 2vh, 24px);
+    margin-bottom: clamp(20px, 4vh, 50px);
+}
+
+.feature-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: clamp(15px, 3vh, 25px);
+    border-radius: 20px;
+    border: 1px solid var(--glass);
+}
+
+.icon-box {
+    color: var(--accent);
+    margin-bottom: clamp(10px, 1.5vh, 15px);
+}
+
+.feature-card h3 {
+    font-size: var(--font-h3);
+    margin: 0 0 8px;
+    color: var(--text-main);
+}
+
+.feature-card p {
+    color: var(--text-sub);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* カード (thanks.html用) */
+.activation-card, .widget-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: clamp(20px, 3vh, 30px);
+    border-radius: 20px;
+    border: 1px solid var(--glass);
+    text-align: left;
+    margin-bottom: clamp(20px, 3vh, 30px);
+    position: relative;
+    overflow: hidden;
+}
+
+.activation-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 5px;
+    background: linear-gradient(90deg, #1d4ed8, #30d158);
+}
+
+.activation-card h2, .widget-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--text-main);
+}
+
+.widget-card h3 { color: var(--accent); }
+.widget-card { background: linear-gradient(135deg, rgba(48, 209, 88, 0.1), transparent); border: 1px solid rgba(48, 209, 88, 0.3); }
+
+.step-list {
+    margin: 15px 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+}
+
+.step-list li {
+    margin-bottom: 10px;
+    padding-left: 35px;
+    position: relative;
+    font-size: 0.95rem;
+}
+
+.step-list li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 0; top: 0;
+    width: 22px; height: 22px;
+    background-color: var(--accent);
+    color: #000;
+    border-radius: 11px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+}
+
+.btn-widget {
+    display: inline-block;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid var(--accent);
+    margin-top: 5px;
+}
+
+/* Ko-fiとスペック情報 */
+.kofi-section {
+    background: linear-gradient(135deg, rgba(29, 78, 216, 0.2), rgba(48, 209, 88, 0.1));
+    padding: clamp(20px, 3vh, 35px);
+    border-radius: 24px;
+    border: 1px solid rgba(48, 209, 88, 0.3);
+    text-align: center;
+    margin-bottom: clamp(20px, 4vh, 40px);
+}
+
+.kofi-section h2 {
+    font-size: var(--font-h2);
+    margin-top: 0; margin-bottom: 10px;
+}
+
+.kofi-section p {
+    color: var(--text-sub);
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.specs {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.03);
+    padding: clamp(15px, 2vh, 20px);
+    border-radius: 16px;
+    margin-bottom: clamp(20px, 4vh, 40px);
+    border: 1px solid var(--glass);
+}
+
+.specs p { margin: 0 0 5px 0; }
+.specs .tested-on { color: var(--text-main); font-size: 1rem; font-weight: bold; }
+.specs .devices { color: var(--text-sub); font-size: 0.95rem; font-family: Menlo, Monaco, monospace; display: block; }
+.specs .warning { margin-top: 10px; color: #ff453a; font-size: 0.9rem; font-weight: bold; }
+
+/* フッター・サポート */
+.support {
+    color: var(--text-sub);
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+.link-text { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+footer {
+    text-align: center;
+    color: #444;
+    font-size: 0.8rem;
+    border-top: 1px solid var(--glass);
+    padding-top: 15px;
+    margin-top: auto; 
+}
+
+/* モーダル */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.modal-overlay.active { opacity: 1; visibility: visible; }
+
+.modal-content {
+    background: #1c1c1e;
+    padding: 25px;
+    border-radius: 24px;
+    width: 90%; max-width: 450px;
+    border: 1px solid var(--glass);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+    position: relative;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-overlay.active .modal-content { transform: translateY(0); }
+
+.close-btn {
+    position: absolute; top: 15px; right: 15px;
+    background: none; border: none;
+    color: var(--text-sub); cursor: pointer;
+}
+.close-btn:hover { color: var(--text-main); }
+
+.modal-content h3 { margin-top: 0; font-size: 1.3rem; flex-shrink: 0; border-bottom: 1px solid var(--glass); padding-bottom: 10px; }
+
+.changelog-list {
+    list-style: none; padding: 0; margin: 0;
+    overflow-y: auto; flex-grow: 1;
+}
+
+.changelog-item { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--glass); }
+.changelog-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.cl-version { font-weight: bold; color: var(--accent); font-size: 1.05rem; }
+.cl-date { font-size: 0.8rem; color: var(--text-sub); margin-left: 10px; }
+.cl-desc { margin: 5px 0 0 0; font-size: 0.9rem; line-height: 1.5; color: #ddd; white-space: pre-wrap; }
+
+/* モバイル向け調整 */
+@media (max-width: 600px) {
+    .container { padding: 40px 15px; }
+    .feature-card { padding: 24px; }
+    .kofi-section { padding: 30px 20px; }
+    .specs { padding: 20px 15px; }
+}
