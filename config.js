@@ -3,8 +3,8 @@
    ========================================== */
 const CONFIG = {
     // GitHub連携 (更新履歴・IPA取得用)
-    githubOwner: '1738-sky',              // あなたのGitHubユーザー名
-    githubRepo: 'FreeupiOS_web',          // Releasesを発行するリポジトリ名
+    githubOwner: 'Peep1738',              // あなたのGitHubユーザー名
+    githubRepo: 'FreeUpiOS_web',          // Releasesを発行するリポジトリ名
 
     // 外部リンク
     kofiUrl: 'https://ko-fi.com/YOUR_KOFI_LINK', // Ko-fiのURL
