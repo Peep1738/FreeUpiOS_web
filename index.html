@@ -168,7 +168,9 @@
                     const li = document.createElement('li');
                     li.className = 'changelog-item';
                     
-                    const headerHTML = `<span class=\"cl-version\">${version}</span><span class=\"cl-date\">${date}</span>`;
+                    // ⬇️ 修正箇所：バージョンと日付を装飾し、余白を設けました
+                    const headerHTML = `<span class="cl-version" style="font-weight: bold; color: var(--accent); margin-right: 10px;">${version}</span><span class="cl-date" style="color: var(--text-sub); font-size: 0.9em;">${date}</span>`;
+                    
                     const p = document.createElement('p');
                     p.className = 'cl-desc';
                     p.textContent = release.body; 
