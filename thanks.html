@@ -111,8 +111,11 @@
             document.getElementById('modal-title').innerText = content[lang].modalTitle;
             document.getElementById('widget-title').innerHTML = content[lang].widgetTitle;
             document.getElementById('widget-text').innerText = content[lang].widgetText;
-            document.getElementById('widget-btn').innerText = content[lang].widgetBtn;
             
+            // 修正箇所: widget-btn から shortcut-link に変更し、エラーを防止
+            document.getElementById('shortcut-link').innerText = content[lang].widgetBtn;
+            
+            // 手順の翻訳
             const stepsUl = document.getElementById('steps');
             if (stepsUl) {
                 stepsUl.innerHTML = '';
@@ -123,12 +126,15 @@
                 });
             }
 
+            // サポート文の翻訳
             document.getElementById('support-text').innerHTML = content[lang].support;
 
+            // ボタンのハイライト切り替え
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.innerText.toLowerCase() === (lang === 'ja' ? 'jp' : 'en'));
             });
             
+            // リンクの反映
             if (typeof CONFIG !== 'undefined') {
                 document.getElementById('shortcut-link').href = CONFIG.shortcutUrl;
                 document.querySelectorAll('.x-link').forEach(el => el.href = CONFIG.xUrl);
@@ -137,7 +143,6 @@
             lucide.createIcons();
         }
 
-        // モーダルの開閉関数
         function openModal() {
             document.getElementById('stepsModal').classList.add('active');
             document.body.style.overflow = 'hidden'; 
