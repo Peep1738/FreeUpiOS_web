@@ -26,14 +26,12 @@
         </header>
 
         <div class="activation-card">
-            <h2 id="card-title"><i data-lucide="key-round" size="24"></i>PRO機能の認証手順</h2>
+            <h2 id="card-title"><i data-lucide="key-round" size="24"></i>PRO機能の認証</h2>
             <p id="card-lead">決済完了後、noreply@sky1738.comから届くメールに記載されている *ライセンスキー（決済ID）* が必要です。</p>
-            <ul class="step-list" id="steps">
-                <li>メールアプリを開き、以下のメールを探します。<br>件名：【FreeUpiOS】PRO版ライセンスキーのご案内 / Your License Key</li>
-                <li>メール内にある *ライセンスキー（決済ID）* をコピーします。</li>
-                <li>FreeUp iOSアプリを開き、設定（歯車アイコン）から **「ライセンスを復元 / プロモコード」** をタップします。</li>
-                <li>コピーしたIDを貼り付け、「認証」ボタンを押して完了させてください。</li>
-            </ul>
+            
+            <button class="download-btn" onclick="openModal()" style="margin-top: 15px; width: 100%; justify-content: center; cursor: pointer; border: none; font-family: inherit;">
+                <i data-lucide="list-ordered"></i> <span id="btn-show-steps">認証手順を表示する</span>
+            </button>
         </div>
 
         <div class="widget-card">
@@ -51,13 +49,28 @@
         </footer>
     </div>
 
+    <div class="modal-overlay" id="stepsModal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" aria-label="Close modal" onclick="closeModal()"><i data-lucide="x"></i></button>
+            <h3 id="modal-title" style="margin-bottom: 15px;">PRO版 認証手順</h3>
+            <ul class="step-list" id="steps">
+                <li>メールアプリを開き、以下のメールを探します。<br>件名：【FreeUpiOS】PRO版ライセンスキーのご案内 / Your License Key</li>
+                <li>メール内にある *ライセンスキー（決済ID）* をコピーします。</li>
+                <li>FreeUp iOSアプリを開き、設定（歯車アイコン）から **「ライセンスを復元 / プロモコード」** をタップします。</li>
+                <li>コピーしたIDを貼り付け、「認証」ボタンを押して完了させてください。</li>
+            </ul>
+        </div>
+    </div>
+
     <script>
         const content = {
             ja: {
                 title: "ご支援ありがとうございます！",
                 welcome: "PRO版へようこそ。すべての制限が解放されました。",
-                cardTitle: "<i data-lucide='key-round' size='24'></i>PRO機能の認証手順",
+                cardTitle: "<i data-lucide='key-round' size='24'></i>PRO機能の認証",
                 cardLead: "決済完了後、noreply@sky1738.comから届くメールに記載されている *ライセンスキー（決済ID）* が必要です。",
+                btnShowSteps: "認証手順を表示する",
+                modalTitle: "PRO版 認証手順",
                 steps: [
                     "メールアプリを開き、以下のメールを探します。<br>件名：【FreeUpiOS】PRO版ライセンスキーのご案内 / Your License Key",
                     "メール内にある *ライセンスキー（決済ID）* をコピーします。",
@@ -72,8 +85,10 @@
             en: {
                 title: "Thank You for Your Support!",
                 welcome: "Welcome to PRO. All limitations have been removed.",
-                cardTitle: "<i data-lucide='key-round' size='24'></i>How to Activate PRO",
+                cardTitle: "<i data-lucide='key-round' size='24'></i>Activate PRO",
                 cardLead: "You will need the *License Key (Transaction ID)* provided in the email sent from noreply@sky1738.com after payment.",
+                btnShowSteps: "Show Activation Steps",
+                modalTitle: "Activation Steps",
                 steps: [
                     "Open your email app and find the following email:<br>Subject: 【FreeUpiOS】PRO版ライセンスキーのご案内 / Your License Key",
                     "Copy the *License Key (Transaction ID)* inside the email.",
@@ -92,8 +107,11 @@
             document.getElementById('welcome').innerText = content[lang].welcome;
             document.getElementById('card-title').innerHTML = content[lang].cardTitle;
             document.getElementById('card-lead').innerHTML = content[lang].cardLead;
+            document.getElementById('btn-show-steps').innerText = content[lang].btnShowSteps;
+            document.getElementById('modal-title').innerText = content[lang].modalTitle;
             document.getElementById('widget-title').innerHTML = content[lang].widgetTitle;
             document.getElementById('widget-text').innerText = content[lang].widgetText;
+            document.getElementById('widget-btn').innerText = content[lang].widgetBtn;
             
             const stepsUl = document.getElementById('steps');
             if (stepsUl) {
@@ -119,7 +137,18 @@
             lucide.createIcons();
         }
 
-        // DOMが読み込まれてから実行
+        // モーダルの開閉関数
+        function openModal() {
+            document.getElementById('stepsModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal(event) {
+            if (event && event.target !== document.getElementById('stepsModal') && !event.target.closest('.close-btn')) return;
+            document.getElementById('stepsModal').classList.remove('active');
+            document.body.style.overflow = ''; 
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             switchLang('ja');
         });
