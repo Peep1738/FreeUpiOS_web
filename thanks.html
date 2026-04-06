@@ -18,7 +18,7 @@
     <div class="container">
         <header>
             <div class="app-icon">
-                <img src="icon.png" alt="FreeUp iOS PRO Icon" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="icon.png" alt="FreeUp iOS PRO Icon">
                 <div class="pro-badge">PRO</div>
             </div>
             <h1 id="title">ご支援ありがとうございます！</h1>
@@ -29,7 +29,11 @@
             <h2 id="card-title"><i data-lucide="key-round" size="24"></i>PRO機能の認証手順</h2>
             <p id="card-lead">決済完了後、noreply@sky1738.comから届くメールに記載されている *ライセンスキー（決済ID）* が必要です。</p>
             <ul class="step-list" id="steps">
-                </ul>
+                <li>メールアプリを開き、以下のメールを探します。<br>件名：【FreeUpiOS】PRO版ライセンスキーのご案内 / Your License Key</li>
+                <li>メール内にある *ライセンスキー（決済ID）* をコピーします。</li>
+                <li>FreeUp iOSアプリを開き、設定（歯車アイコン）から **「ライセンスを復元 / プロモコード」** をタップします。</li>
+                <li>コピーしたIDを貼り付け、「認証」ボタンを押して完了させてください。</li>
+            </ul>
         </div>
 
         <div class="widget-card">
@@ -90,30 +94,35 @@
             document.getElementById('card-lead').innerHTML = content[lang].cardLead;
             document.getElementById('widget-title').innerHTML = content[lang].widgetTitle;
             document.getElementById('widget-text').innerText = content[lang].widgetText;
-            document.getElementById('widget-btn').innerText = content[lang].widgetBtn;
-            document.getElementById('support-text').innerHTML = content[lang].support;
-
+            
             const stepsUl = document.getElementById('steps');
-            stepsUl.innerHTML = '';
-            content[lang].steps.forEach(text => {
-                const li = document.createElement('li');
-                li.innerHTML = text; 
-                stepsUl.appendChild(li);
-            });
+            if (stepsUl) {
+                stepsUl.innerHTML = '';
+                content[lang].steps.forEach(text => {
+                    const li = document.createElement('li');
+                    li.innerHTML = text; 
+                    stepsUl.appendChild(li);
+                });
+            }
+
+            document.getElementById('support-text').innerHTML = content[lang].support;
 
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.innerText.toLowerCase() === (lang === 'ja' ? 'jp' : 'en'));
             });
             
-            // config.js の設定を反映
-            document.getElementById('shortcut-link').href = CONFIG.shortcutUrl;
-            document.querySelectorAll('.x-link').forEach(el => el.href = CONFIG.xUrl);
+            if (typeof CONFIG !== 'undefined') {
+                document.getElementById('shortcut-link').href = CONFIG.shortcutUrl;
+                document.querySelectorAll('.x-link').forEach(el => el.href = CONFIG.xUrl);
+            }
 
             lucide.createIcons();
         }
 
-        // 実行
-        switchLang('ja');
+        // DOMが読み込まれてから実行
+        window.addEventListener('DOMContentLoaded', () => {
+            switchLang('ja');
+        });
     </script>
 </body>
 </html>
