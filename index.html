@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreeUp iOS | 高性能メモリ最適化ツール</title>
+    <title>FreeUp iOS | メモリ解放</title>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css">
     <script src="config.js"></script>
@@ -18,7 +18,7 @@
     <div class="container">
         <header>
             <div class="app-icon">
-                <img src="icon.png" alt="FreeUp iOS Icon" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="icon.png" alt="FreeUp iOS Icon">
             </div>
             <h1>FreeUp iOS</h1>
             <p class="tagline" id="tagline">TrollStore・Sideload環境に対応したメモリ解放アプリ</p>
@@ -75,7 +75,6 @@
         let currentLatestVersion = '1.0.0';
         let currentLang = 'ja';
 
-        // 翻訳データ
         const content = {
             ja: {
                 tagline: "TrollStore・Sideload環境に対応したメモリ解放アプリ",
@@ -131,14 +130,16 @@
                 btn.classList.toggle('active', btn.innerText.toLowerCase() === (lang === 'ja' ? 'jp' : 'en'));
             });
             
-            // config.js の設定を反映
-            document.getElementById('kofi-link').href = CONFIG.kofiUrl;
-            document.querySelectorAll('.x-link').forEach(el => el.href = CONFIG.xUrl);
+            if (typeof CONFIG !== 'undefined') {
+                document.getElementById('kofi-link').href = CONFIG.kofiUrl;
+                document.querySelectorAll('.x-link').forEach(el => el.href = CONFIG.xUrl);
+            }
         }
 
-        // GitHub API からリリース情報を取得
         async function fetchGitHubReleases() {
             const listEl = document.getElementById('changelog-list');
+            if (typeof CONFIG === 'undefined') return;
+            
             try {
                 const response = await fetch(`https://api.github.com/repos/${CONFIG.githubOwner}/${CONFIG.githubRepo}/releases`);
                 if (!response.ok) throw new Error('API Error');
@@ -147,7 +148,7 @@
                 listEl.innerHTML = '';
                 
                 if (releases.length === 0) {
-                    listEl.innerHTML = `<li class="changelog-item"><p class="cl-desc">No releases found.</p></li>`;
+                    listEl.innerHTML = `<li class=\"changelog-item\"><p class=\"cl-desc\">No releases found.</p></li>`;
                     return;
                 }
 
@@ -167,7 +168,7 @@
                     const li = document.createElement('li');
                     li.className = 'changelog-item';
                     
-                    const headerHTML = `<span class="cl-version">${version}</span><span class="cl-date">${date}</span>`;
+                    const headerHTML = `<span class=\"cl-version\">${version}</span><span class=\"cl-date\">${date}</span>`;
                     const p = document.createElement('p');
                     p.className = 'cl-desc';
                     p.textContent = release.body; 
@@ -179,7 +180,7 @@
 
             } catch (error) {
                 console.error(error);
-                listEl.innerHTML = `<li class="changelog-item"><p class="cl-desc">${content[currentLang].fetchError}</p></li>`;
+                listEl.innerHTML = `<li class=\"changelog-item\"><p class=\"cl-desc\">${content[currentLang].fetchError}</p></li>`;
                 currentLatestVersion = "1.0.0";
                 switchLang(currentLang);
             }
@@ -196,10 +197,11 @@
             document.body.style.overflow = ''; 
         }
 
-        // 実行
-        lucide.createIcons();
-        switchLang('ja');
-        fetchGitHubReleases();
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            switchLang('ja');
+            fetchGitHubReleases();
+        });
     </script>
 </body>
 </html>
