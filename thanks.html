@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta property="og:title" content="PRO Activated | FreeUp iOS">
+    <meta property="og:description" content="FreeUp iOS PRO版の認証手順と専用ウィジェットのご案内">
+    <meta property="og:image" content="https://peep1738.github.io/FreeUpiOS_web/icon.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@1738_sky">
+
     <title>PRO Activated | FreeUp iOS</title>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css">
@@ -26,7 +33,7 @@
         </header>
 
         <div class="activation-card">
-            <h2 id="card-title"><i data-lucide="key-round" size="24"></i>PRO機能の認証</h2>
+            <h2><i data-lucide="key-round" size="24"></i><span id="card-title">PRO機能の認証</span></h2>
             <p id="card-lead">決済完了後、noreply@sky1738.comから届くメールに記載されている *ライセンスキー（決済ID）* が必要です。</p>
             
             <button class="download-btn" onclick="openModal()" style="margin-top: 15px; width: 100%; justify-content: center; cursor: pointer; border: none; font-family: inherit;">
@@ -35,7 +42,7 @@
         </div>
 
         <div class="widget-card">
-            <h3 id="widget-title"><i data-lucide="layout-grid" size="20"></i>おまけ：専用ウィジェット</h3>
+            <h3><i data-lucide="layout-grid" size="20"></i><span id="widget-title">おまけ：専用ウィジェット</span></h3>
             <p id="widget-text">ホーム画面から1タップで最適化を開始できるiCloudショートカットを追加できます。</p>
             <a href="#" id="shortcut-link" target="_blank" rel="noopener noreferrer" class="btn-widget">ショートカットをダウンロード ↗︎</a>
         </div>
@@ -67,7 +74,7 @@
             ja: {
                 title: "ご支援ありがとうございます！",
                 welcome: "PRO版へようこそ。すべての制限が解放されました。",
-                cardTitle: "<i data-lucide='key-round' size='24'></i>PRO機能の認証",
+                cardTitle: "PRO機能の認証",
                 cardLead: "決済完了後、noreply@sky1738.comから届くメールに記載されている *ライセンスキー（決済ID）* が必要です。",
                 btnShowSteps: "認証手順を表示する",
                 modalTitle: "PRO版 認証手順",
@@ -77,7 +84,7 @@
                     "FreeUp iOSアプリを開き、設定（歯車アイコン）から **「ライセンスを復元 / プロモコード」** をタップします。",
                     "コピーしたIDを貼り付け、「認証」ボタンを押して完了させてください。"
                 ],
-                widgetTitle: "<i data-lucide='layout-grid' size='20'></i>おまけ：専用ウィジェット",
+                widgetTitle: "おまけ：専用ウィジェット",
                 widgetText: "ホーム画面から1タップで最適化を開始できるiCloudショートカットを追加できます。",
                 widgetBtn: "ショートカットをダウンロード ↗︎",
                 support: "ご不明な点や不具合がございましたら、お気軽に𝕏 (<a href='#' class='x-link link-text' target='_blank' rel='noopener noreferrer'>@1738_sky</a>) までご連絡ください。"
@@ -85,7 +92,7 @@
             en: {
                 title: "Thank You for Your Support!",
                 welcome: "Welcome to PRO. All limitations have been removed.",
-                cardTitle: "<i data-lucide='key-round' size='24'></i>Activate PRO",
+                cardTitle: "Activate PRO",
                 cardLead: "You will need the *License Key (Transaction ID)* provided in the email sent from noreply@sky1738.com after payment.",
                 btnShowSteps: "Show Activation Steps",
                 modalTitle: "Activation Steps",
@@ -95,7 +102,7 @@
                     "Open the FreeUp iOS app, go to Settings (gear icon), and tap **\"Restore License / Promo Code\"**.",
                     "Paste the copied ID and tap the \"Unlock\" button to finish."
                 ],
-                widgetTitle: "<i data-lucide='layout-grid' size='20'></i>Bonus: Dedicated Widget",
+                widgetTitle: "Bonus: Dedicated Widget",
                 widgetText: "Add an iCloud shortcut to start optimization with a single tap from your Home Screen.",
                 widgetBtn: "Download Shortcut ↗︎",
                 support: "If you have any questions or issues, feel free to contact me on 𝕏 (<a href='#' class='x-link link-text' target='_blank' rel='noopener noreferrer'>@1738_sky</a>)."
@@ -105,17 +112,15 @@
         function switchLang(lang) {
             document.getElementById('title').innerHTML = content[lang].title;
             document.getElementById('welcome').innerText = content[lang].welcome;
-            document.getElementById('card-title').innerHTML = content[lang].cardTitle;
+            document.getElementById('card-title').innerText = content[lang].cardTitle;
             document.getElementById('card-lead').innerHTML = content[lang].cardLead;
             document.getElementById('btn-show-steps').innerText = content[lang].btnShowSteps;
             document.getElementById('modal-title').innerText = content[lang].modalTitle;
-            document.getElementById('widget-title').innerHTML = content[lang].widgetTitle;
+            document.getElementById('widget-title').innerText = content[lang].widgetTitle;
             document.getElementById('widget-text').innerText = content[lang].widgetText;
             
-            // 修正箇所: widget-btn から shortcut-link に変更し、エラーを防止
             document.getElementById('shortcut-link').innerText = content[lang].widgetBtn;
             
-            // 手順の翻訳
             const stepsUl = document.getElementById('steps');
             if (stepsUl) {
                 stepsUl.innerHTML = '';
@@ -126,20 +131,18 @@
                 });
             }
 
-            // サポート文の翻訳
             document.getElementById('support-text').innerHTML = content[lang].support;
 
-            // ボタンのハイライト切り替え
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.innerText.toLowerCase() === (lang === 'ja' ? 'jp' : 'en'));
             });
             
-            // リンクの反映
             if (typeof CONFIG !== 'undefined') {
                 document.getElementById('shortcut-link').href = CONFIG.shortcutUrl;
                 document.querySelectorAll('.x-link').forEach(el => el.href = CONFIG.xUrl);
             }
 
+            // アイコン再描画による不具合防止
             lucide.createIcons();
         }
 
