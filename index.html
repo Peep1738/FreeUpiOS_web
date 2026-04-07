@@ -156,14 +156,14 @@
                 listEl.innerHTML = '';
                 
                 if (releases.length === 0) {
-                    listEl.innerHTML = `<li class=\"changelog-item\"><p class=\"cl-desc\">No releases found.</p></li>`;
+                    listEl.innerHTML = `<li class="changelog-item"><p class="cl-desc">No releases found.</p></li>`;
                     return;
                 }
 
                 currentLatestVersion = releases[0].tag_name.replace('v', '');
                 switchLang(currentLang);
 
-                // IPAファイルがあれば直リンクに差し替え
+                // IPAがアセットに存在すれば直リンクに書き換える
                 const ipaAsset = releases[0].assets.find(asset => asset.name.endsWith('.ipa'));
                 if (ipaAsset) {
                     document.getElementById('download-link').href = ipaAsset.browser_download_url;
@@ -182,7 +182,7 @@
                     const p = document.createElement('p');
                     p.className = 'cl-desc';
                     
-                    // 改行を <br> に変換（セキュリティのためのエスケープ処理込み）
+                    // GitHubのリリースノートの改行を<br>に変換。念のためXSS対策でタグをエスケープしておく
                     const safeText = release.body
                         .replace(/&/g, "&amp;")
                         .replace(/</g, "&lt;")
@@ -192,11 +192,11 @@
                     li.innerHTML = headerHTML;
                     li.appendChild(p);
                     listEl.appendChild(li);
-                }); // ← ⚠️ここが消えていたので直しました！
+                });
 
             } catch (error) {
                 console.error(error);
-                listEl.innerHTML = `<li class=\"changelog-item\"><p class=\"cl-desc\">${content[currentLang].fetchError}</p></li>`;
+                listEl.innerHTML = `<li class="changelog-item"><p class="cl-desc">${content[currentLang].fetchError}</p></li>`;
                 currentLatestVersion = "1.0.0";
                 switchLang(currentLang);
             }
