@@ -89,7 +89,6 @@ header {
     justify-content: center;
     box-shadow: 0 15px 30px rgba(0,0,0,0.5);
     position: relative;
-    /* overflow: hidden; はバッジが消えるため削除 */
 }
 
 /* 画像自体の角丸を保証 */
@@ -206,7 +205,7 @@ h1 {
     border: 1px solid rgba(48, 209, 88, 0.3);
 }
 
-/* リスト表示の修正 */
+/* リスト表示 */
 .step-list {
     margin: 15px 0 0;
     padding: 0;
@@ -298,9 +297,29 @@ footer {
     transition: all 0.3s ease;
     z-index: 1000;
 }
-.modal-overlay.active { opacity: 1; visibility: visible; }
+
+.modal-overlay.active { 
+    opacity: 1; 
+    visibility: visible; 
+}
+
 .modal-content {
-    background: #1c1c1e; padding: 25px; border-radius: 24px;
-    width: 90%; max-width: 450px; border: 1px solid var(--glass);
-    max-height: 80vh; display: flex; flex-direction: column;
+    background: #1c1c1e; 
+    padding: 25px; 
+    border-radius: 24px;
+    width: 90%; 
+    max-width: 450px; 
+    border: 1px solid var(--glass);
+    max-height: 80vh; 
+    display: flex; 
+    flex-direction: column;
+    overflow-y: auto; /* 長いリリースノート用にスクロール可能にする */
+}
+
+/* GitHubの改行を正しく反映させる */
+.cl-desc {
+    white-space: pre-wrap;
+    line-height: 1.5;
+    margin-top: 8px;
+    color: var(--text-sub);
 }
