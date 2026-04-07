@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta property="og:title" content="FreeUp iOS">
+    <meta property="og:description" content="TrollStore・Sideload環境に対応した強力なメモリ解放アプリ">
+    <meta property="og:image" content="https://peep1738.github.io/FreeUpiOS_web/icon.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@1738_sky">
+
     <title>FreeUp iOS | メモリ解放</title>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css">
@@ -22,7 +29,8 @@
             </div>
             <h1>FreeUp iOS</h1>
             <p class="tagline" id="tagline">TrollStore・Sideload環境に対応したメモリ解放アプリ</p>
-            <a href="#" class="download-btn" id="download-link" target="_blank" rel="noopener noreferrer">
+            
+            <a href="https://github.com/Peep1738/FreeUpiOS_web/releases/latest" class="download-btn" id="download-link" target="_blank" rel="noopener noreferrer">
                 <i data-lucide="download"></i> <span id="download-text">Download .ipa</span>
             </a>
             <br>
@@ -155,6 +163,7 @@
                 currentLatestVersion = releases[0].tag_name.replace('v', '');
                 switchLang(currentLang);
 
+                // IPAファイルがあれば直リンクに差し替え
                 const ipaAsset = releases[0].assets.find(asset => asset.name.endsWith('.ipa'));
                 if (ipaAsset) {
                     document.getElementById('download-link').href = ipaAsset.browser_download_url;
@@ -168,7 +177,6 @@
                     const li = document.createElement('li');
                     li.className = 'changelog-item';
                     
-                    // ⬇️ 修正箇所：バージョンと日付を装飾し、余白を設けました
                     const headerHTML = `<span class="cl-version" style="font-weight: bold; color: var(--accent); margin-right: 10px;">${version}</span><span class="cl-date" style="color: var(--text-sub); font-size: 0.9em;">${date}</span>`;
                     
                     const p = document.createElement('p');
