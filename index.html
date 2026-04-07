@@ -181,12 +181,18 @@
                     
                     const p = document.createElement('p');
                     p.className = 'cl-desc';
-                    p.textContent = release.body; 
+                    
+                    // 改行を <br> に変換（セキュリティのためのエスケープ処理込み）
+                    const safeText = release.body
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;");
+                    p.innerHTML = safeText.replace(/\r?\n/g, '<br>');
 
                     li.innerHTML = headerHTML;
                     li.appendChild(p);
                     listEl.appendChild(li);
-                });
+                }); // ← ⚠️ここが消えていたので直しました！
 
             } catch (error) {
                 console.error(error);
